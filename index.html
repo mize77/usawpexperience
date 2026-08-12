@@ -11632,16 +11632,19 @@ function toggleFrontCourt(on){
     // setFieldRotation) -- text boxes live in a separate, sibling group
     // that isn't part of that transform, so without this they'd stay at
     // their original screen orientation while the field turns underneath
-    // them. Rotating them the opposite direction (+90, "left") keeps them
-    // visually attached to whatever they're labeling.
-    rotateAllTextBoxes(90);
+    // them. Front Court view: rotate 90 clockwise (same convention as the
+    // manual "turn right" control, which subtracts from the stored value).
+    rotateAllTextBoxes(-90);
   } else {
     // Restore the widened venue FIRST (if presentation mode is still
     // active), so setFieldRotation's off-state picks the correct matching
     // viewBox.
     if(inPresentationWidened) setPresentationFieldGeometry(true);
     setFieldRotation(false);
-    rotateAllTextBoxes(-90);
+    // Full Court view: rotate 90 counter-clockwise (same convention as
+    // "turn left", which adds to the stored value) -- exactly undoes the
+    // Front Court rotation above, so round trips don't drift.
+    rotateAllTextBoxes(90);
   }
   renderAllPositions();
   fitBoardToScreen();
