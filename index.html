@@ -9889,6 +9889,13 @@ function buildViewerExperienceSteps(){
     { // Step 5 -- press Play on the remote
       instruction: 'Almost there! Tap the highlighted \u25B6 Play button on the remote to run the drill.',
       bannerSide: 'left',
+      // The engine's default behavior hides the remote the instant playing
+      // becomes true (see updateTutorialBannerPlayingVisibility) -- built
+      // for the OTHER tutorial, where the remote isn't needed again until
+      // a later outro step. Here, pressing Play is the tutorial's final
+      // action, and the whole point is for the remote to stay visible
+      // through it and into free play afterward.
+      onEnter(){ tutorialSuppressRemoteAutoHide = true; },
       highlight: '#tcPlayPauseBtn',
       validate: { type:'custom', fn: ()=> playing===true },
       autoComplete(){ if(typeof playFrames==='function') playFrames(); }
@@ -9923,7 +9930,11 @@ async function startViewerMode(){
         }
       } catch(err) { console.error('Could not seed embedded viewer drill:', err); }
       startTutorial(buildViewerExperienceSteps(), {
-        completionMessage: 'You\u2019re all set! Explore \u201c'+VIEWER_DRILL_NAME+'\u201d freely -- switch views, use the remote, or try the tools on the left.'
+        completionMessage: 'You\u2019re all set! Explore \u201c'+VIEWER_DRILL_NAME+'\u201d freely -- switch views, use the remote, or try the tools on the left.',
+        onComplete(){
+          document.getElementById('quickCommandBar')?.classList.add('qcbFaded');
+          tutorialSuppressRemoteAutoHide = false;
+        }
       });
     }
   } catch(err) {
