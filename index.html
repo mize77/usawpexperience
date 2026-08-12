@@ -93,7 +93,11 @@
   body.viewerModeActive .cmdCategory[data-cat="present"],
   body.viewerModeActive .cmdCategory[data-cat="admin"],
   body.viewerModeActive #openPracticeStudioBtn,
-  body.viewerModeActive #sidebarPracticeStudioBtn { display:none !important; }
+  body.viewerModeActive #sidebarPracticeStudioBtn,
+  body.viewerModeActive #addFrameBtn,
+  body.viewerModeActive #deleteFrameBtn,
+  body.viewerModeActive #tcAddFrameBtn,
+  body.viewerModeActive #tcDeleteFrameBtn { display:none !important; }
   #quickCommandBar { position:fixed; top:12px; right:12px; z-index:70; background:rgba(255,255,255,.96); border:1px solid #c3d2d2; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,.2); display:flex; align-items:center; gap:4px; padding:6px 8px; transition:opacity .2s ease; }
   body.presentation.qcbHiddenForScreen #quickCommandBar, body.presentation.qcbHiddenForScreen #showQuickCommandBarTab { display:none !important; }
   #quickCommandBar { z-index:1520; top:12px; left:50%; right:auto; transform:translateX(-50%); }
