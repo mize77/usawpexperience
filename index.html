@@ -8664,7 +8664,7 @@ function buildFirstCoachingSessionSteps(){
       isPreStep: true,
       requiresAcknowledge: true,
       skipSuccessMessage: true, // nothing was actually accomplished besides reading and tapping "Got it"
-      instruction: 'Welcome! Throughout this tutorial, always look for the pulsing red circle -- it marks exactly what to tap or work with next.\n\nTap "Got it" below to begin.',
+      instruction: 'Welcome! Throughout this tutorial, always look for the pulsing red frame -- it marks exactly what to tap or work with next.\n\nTap "Got it" below to begin.',
       bannerSide: 'left',
       highlight: '#tutorialAcknowledgeBtn',
       validate: { type:'custom', fn: ()=> tutorialManualAck }
@@ -9798,7 +9798,7 @@ function hideFrontCourtTip(){
 }
 document.getElementById('frontCourtTipDismissBtn')?.addEventListener('click', hideFrontCourtTip);
 function buildViewerExperienceSteps(){
-  const drillName = VIEWER_DRILL_NAME;
+  const drillName = getActiveUserName()+' '+VIEWER_DRILL_NAME;
   const drillNameNormalized = drillName.trim().toLowerCase();
   function findDrillButton(){
     return [...document.querySelectorAll('#openItemList button')].find(b=>(b.textContent||'').trim().toLowerCase()===drillNameNormalized);
@@ -9819,7 +9819,7 @@ function buildViewerExperienceSteps(){
       isPreStep: true,
       requiresAcknowledge: true,
       skipSuccessMessage: true,
-      instruction: 'Welcome! We\u2019ve prepared \u201c'+drillName+'\u201d for you to explore. Look for the pulsing red circle -- it marks exactly what to tap next. You can leave this guided tour at any time with "Exit Tutorial".\n\nTap "Got it" to begin.',
+      instruction: 'Welcome! We\u2019ve prepared \u201c'+drillName+'\u201d for you to explore. Look for the pulsing red frame -- it marks exactly what to tap next. You can leave this guided tour at any time with "Exit Tutorial".\n\nTap "Got it" to begin.',
       bannerSide: 'left',
       highlight: '#tutorialAcknowledgeBtn',
       validate: { type:'custom', fn: ()=> tutorialManualAck },
@@ -9872,7 +9872,7 @@ function buildViewerExperienceSteps(){
         // step) -- load directly via the same path renderOpenItemList's own
         // click handler uses, so behavior matches exactly either way.
         const store = soGetStore('sequence');
-        const key = getActiveUserName()+' '+drillName;
+        const key = drillName;
         if(store[key]){
           recordHistory('Load Sequence: '+key);
           if(frames.length) frames[currentFrame]=makeFrameState();
